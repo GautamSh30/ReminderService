@@ -5,6 +5,8 @@ const { PORT } = require("./config/serverConfig");
 
 const { sendBasicEmail } = require("./services/email-service");
 
+const crom = require("node-cron");
+
 const setupAndStartServer = () => {
   const app = express();
   app.use(bodyParser.json());
@@ -19,6 +21,10 @@ const setupAndStartServer = () => {
       "Testing",
       "Aur bsdk"
     );
+
+    crossOriginIsolated.schedule("*/2 * * * *", () => {
+      console.log("running a task every 2 min");
+    });
   });
 };
 
